@@ -5,6 +5,7 @@ import { View, Text, Button, TextInput, Alert } from 'react-native';
 //and going back removes a screen from the top of the stack
 import { StackNavigator } from 'react-navigation';
 import axios from 'axios';
+import TraineSearchScrn from './TraineSearchScrn';
 
 
 class App extends Component {
@@ -21,6 +22,11 @@ class App extends Component {
     render() {
         const { navigate } = this.props.navigation;
 
+        var navigateNext = function () {
+
+            navigate('TraineSearchScrn');
+        }
+
 
         var login = function (email, password) {
 
@@ -36,7 +42,7 @@ class App extends Component {
                     scope: 'openid'
                 }
             }).then(function (response) {
-                // ()=> navigate ('TraineSearchScrn');
+                navigateNext();
                 Alert.alert('Login successfull', JSON.stringify(response));
                 return JSON.stringify(response);
             }).catch(function (error) {
@@ -74,7 +80,8 @@ class App extends Component {
 
 
 const Navigator = StackNavigator({
-    Home: { screen: App }
+    Home: { screen: App },
+    TraineSearchScrn: { screen: TraineSearchScrn }
 
 })
 
