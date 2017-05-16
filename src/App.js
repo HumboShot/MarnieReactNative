@@ -19,10 +19,11 @@ class App extends Component {
 
 
     render() {
-         const { navigate } = this.props.navigation;
+        const { navigate } = this.props.navigation;
 
 
         var login = function (email, password) {
+
             axios({
                 method: 'post',
                 url: 'https://olek.eu.auth0.com/oauth/ro',
@@ -35,24 +36,22 @@ class App extends Component {
                     scope: 'openid'
                 }
             }).then(function (response) {
-                 ()=> navigate ('TraineSearchScrn');
+                // ()=> navigate ('TraineSearchScrn');
                 Alert.alert('Login successfull', JSON.stringify(response));
-                //response.json();
-               
                 return JSON.stringify(response);
-            })
-                .catch(function(error) {
-                    Alert.alert('Login failed');
-                    console.error(error);
-                })
+            }).catch(function (error) {
+                Alert.alert('Login failed', JSON.stringify(error));
+                console.log(error);
+            });
+
         }
 
-        
+
 
         // We have wrapped our App component into the StackNavigator. 
         // The StackNavigator exposes the navigation properties.
 
-       
+
 
 
         return (
